@@ -48,9 +48,18 @@ public class ParenthesisExpression implements Expression {
                 
                 if(precedence == bExpr.getPrecedence().value) {
                     bExpr.setOperand2(expressions.remove(i+1));
-                    bExpr.setOperand1(expressions.remove(i-1));
-                    i--;
+
+                    if(i == 0) {
+                        bExpr.setOperand1(new NumericExpression(0));
+                    } else {
+                        bExpr.setOperand1(expressions.remove(i - 1));
+                        i--;
+                    }
                 }
+            } else if(expr instanceof UnaryExpression) {
+                UnaryExpression uExpr = (UnaryExpression) expr;
+
+                uExpr.evaluate();
             }
             
             i++;

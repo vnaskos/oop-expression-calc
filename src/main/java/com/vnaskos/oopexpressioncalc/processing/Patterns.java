@@ -13,13 +13,13 @@ public class Patterns {
     
     private static void initPatterns() {
         String packageName = "com.vnaskos.oopexpressioncalc.expressions.";
-        
+
         //Number
         PATTERNS.put(packageName+"NumericExpression", "\\d+(\\.\\d+)?");
         
         //Plus
         PATTERNS.put(packageName+"AddExpression", "\\+");
-        
+
         //Minus
         PATTERNS.put(packageName+"SubtractExpression", "-");
         

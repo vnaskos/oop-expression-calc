@@ -12,7 +12,7 @@ import java.util.List;
 public class Calculator {
     
     public static void main(String[] args) throws Exception {
-        String mathExpression = "-1";
+        String mathExpression = "(-10)/5";
         Tokenizer tokenizer = getDefaultTokenizer();
         List<String> tokens = tokenizer.tokenize(mathExpression);
         ExpressionParser parser = new ExpressionParser();
