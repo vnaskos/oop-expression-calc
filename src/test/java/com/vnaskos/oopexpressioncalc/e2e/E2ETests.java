@@ -4,6 +4,7 @@ import com.vnaskos.oopexpressioncalc.expressions.ParenthesisExpression;
 import com.vnaskos.oopexpressioncalc.processing.ExpressionParser;
 import com.vnaskos.oopexpressioncalc.processing.Tokenizer;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -12,6 +13,12 @@ import java.util.List;
 import static com.vnaskos.oopexpressioncalc.processing.Tokenizer.getDefaultTokenizer;
 
 public class E2ETests {
+
+    @Test
+    public void noExpressions_ShouldBeZero() throws Exception {
+        double result = calculate("");
+        Assertions.assertEquals(0, result);
+    }
 
     @ParameterizedTest
     @CsvSource({
@@ -109,6 +116,7 @@ public class E2ETests {
 
     @ParameterizedTest
     @CsvSource({
+        "'()', 0",
         "'(1)', 1",
         "'(-1)', -1",
         "'(1-1)', 0",

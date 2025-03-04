@@ -8,6 +8,7 @@ import java.util.List;
  */
 public class ParenthesisExpression implements Expression {
 
+    public static final int INITIAL_ZERO = 0;
     protected final List<Expression> expressions;
 
     public ParenthesisExpression() {
@@ -17,35 +18,39 @@ public class ParenthesisExpression implements Expression {
     public ParenthesisExpression(List<Expression> expressions) {
         this.expressions = expressions;
     }
-    
+
     public void add(Expression expr) {
         expressions.add(expr);
     }
-    
+
     public void remove(Expression expr) {
         expressions.remove(expr);
     }
-    
+
     @Override
     public double evaluate() {
         int precedence = Priority.HIGHEST.value;
-        
+
         while(precedence > Priority.LOWEST.value) {
             processEpression(precedence--);
         }
-        
+
+        if (expressions.isEmpty()) {
+            return INITIAL_ZERO;
+        }
+
         return expressions.get(0).evaluate();
     }
-    
+
     protected void processEpression(int precedence) {
         int i = 0;
-        
+
         while(i < expressions.size()) {
             Expression expr = expressions.get(i);
-            
+
             if(expr instanceof BinaryExpression) {
                 BinaryExpression bExpr = (BinaryExpression) expr;
-                
+
                 if(precedence == bExpr.getPrecedence().value) {
                     bExpr.setOperand2(expressions.remove(i+1));
 
@@ -61,9 +66,9 @@ public class ParenthesisExpression implements Expression {
 
                 uExpr.evaluate();
             }
-            
+
             i++;
         }
     }
-    
+
 }
